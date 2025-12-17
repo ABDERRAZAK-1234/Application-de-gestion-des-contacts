@@ -1,19 +1,8 @@
 <?php
 require "db.php";
+require "regex.php";
             ?>
-<?php 
-$msg_name = "";
-     if (isset($_POST['submit'])) {
-                        //checking name
-                        if (empty($_POST['username']))
-                        $msg_name = "You must supply your name";
-                        $name_subject = $_POST['username'];
-                        $name_pattern = '/^[a-zA-Z ]*$/';
-                        preg_match($name_pattern, $name_subject, $name_matches);
-                        if (!$name_matches[0])
-                            $msg2_name = "Only alphabets and white space allowed";
-                    }
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,13 +32,27 @@ $msg_name = "";
                         <div class="divider d-flex align-items-center my-4">
                         </div>
                         <!-- nam -->
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form3Example3">Username</label>
-                            <input type="text" id="form3Example3" class="form-control form-control-lg"
-                                placeholder="Enter votre nom" name="username" />
-                            <?php echo "<p class='note'>".$msg_name."</p>";?>
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3">Username</label>
+                                <input type="text" id="form3Example3" class="form-control form-control-lg"
+                                    placeholder="Enter votre username" name="username" />
+                                <?php echo "<p class='note text-danger'>".$msg_name."</p>";?>
+                                <?php echo "<p class='note text-danger'>".$msg2_name."</p>";?>
 
-                        </div>
+                            </div>
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3">E-mail</label>
+                                <input type="text" name="email" id="form3Example3" class="form-control form-control-lg"
+                                    placeholder="Enter votre email" />
+                                <?php echo "<p class='note text-danger'>".$msg_email."</p>";?>
+                                <?php echo "<p class='note text-danger'>".$msg2_email."</p>";?>
+                            </div>
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3">Telephone</label>
+                                <input type="email" class="form-control form-control-lg"
+                                    placeholder="Enter votre telephone" name="username" />
+                                <?php echo "<p class='note text-danger'>".$msg_name."</p>";?>
+                            </div>
 
 
                         <!-- Password input -->
@@ -82,13 +85,13 @@ $msg_name = "";
                 </div>
             </div>
         </div>
-        <div
+        <!-- <div
             class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-xl-5 bg-primary">
-            <!-- Copyright -->
+            Copyright
             <div class="text-white pt-1 pb-4">
                 Copyright © 2020. All rights reserved.
             </div>
-        </div>
+        </div> -->
         <!-- Right -->
         </div>
     </section>
