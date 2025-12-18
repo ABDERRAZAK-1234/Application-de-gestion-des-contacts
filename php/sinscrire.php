@@ -1,7 +1,7 @@
 <?php
 require "db.php";
 require "regex.php";
-            ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,41 +31,43 @@ require "regex.php";
 
                         <div class="divider d-flex align-items-center my-4">
                         </div>
-                        <!-- nam -->
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Username</label>
-                                <input type="text" id="form3Example3" class="form-control form-control-lg"
-                                    placeholder="Enter votre username" name="username" />
-                                <?php echo "<p class='note text-danger'>".$msg_name."</p>";?>
-                                <?php echo "<p class='note text-danger'>".$msg2_name."</p>";?>
+                        <!-- Username -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">Username</label>
+                            <input type="text" id="form3Example3" class="form-control form-control-lg" placeholder="Enter your username" name="username" />
+                            <?php echo "<p class='note text-danger'>" . $msg_name . "</p>"; ?>
+                            <?php echo "<p class='note text-danger'>" . $msg2_name . "</p>"; ?>
+                        </div>
 
-                            </div>
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">E-mail</label>
-                                <input type="text" name="email" id="form3Example3" class="form-control form-control-lg"
-                                    placeholder="Enter votre email" />
-                                <?php echo "<p class='note text-danger'>".$msg_email."</p>";?>
-                                <?php echo "<p class='note text-danger'>".$msg2_email."</p>";?>
-                            </div>
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Telephone</label>
-                                <input type="email" class="form-control form-control-lg"
-                                    placeholder="Enter votre telephone" name="username" />
-                                <?php echo "<p class='note text-danger'>".$msg_name."</p>";?>
-                            </div>
+                        <!-- Email -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">E-mail</label>
+                            <input type="email" name="email" id="form3Example3" class="form-control form-control-lg" placeholder="Enter your email" />
+                            <?php echo "<p class='note text-danger'>" . $msg_email . "</p>"; ?>
+                            <?php echo "<p class='note text-danger'>" . $msg2_email . "</p>"; ?>
+                        </div>
 
+                        <!-- Telephone -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">Telephone</label>
+                            <input type="tel" class="form-control form-control-lg" placeholder="Enter your telephone number" name="telephone" />
+                            <?php echo "<p class='note text-danger'>" . $msg_tel . "</p>"; ?>
+                        </div>
 
-                        <!-- Password input -->
+                        <!-- Password -->
                         <div data-mdb-input-init class="form-outline mb-3">
                             <label class="form-label" for="form3Example4">Password</label>
-                            <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                placeholder="Enter password" name="password" />
+                            <input type="password" class="form-control form-control-lg" placeholder="Enter password" name="password" />
+                            <?php echo "<p class='note text-danger'>" . $msg_password . "</p>"; ?>
                         </div>
+
+                        <!-- Verify Password -->
                         <div data-mdb-input-init class="form-outline mb-3">
-                            <label class="form-label" for="form3Example4">Vérifier password</label>
-                            <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                placeholder="Repeter password" name="passwordV" />
+                            <label class="form-label" for="form3Example4">Verify Password</label>
+                            <input type="password" class="form-control form-control-lg" placeholder="Repeat password" name="passwordV" />
+                            <?php echo "<p class='note text-danger'>" . $msg_password_verify . "</p>"; ?>
                         </div>
+
 
                         <div class="d-flex justify-content-between align-items-center">
 
@@ -80,7 +82,7 @@ require "regex.php";
                         </div>
 
                     </form>
-                    
+
 
                 </div>
             </div>

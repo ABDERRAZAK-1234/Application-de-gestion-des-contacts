@@ -1,12 +1,15 @@
 <?php
-$mysqlClient = new PDO(
-    'mysql:host=localhost;dbname=connect_flow;charset=utf8',
-    'root',
-    ''
-);
 try {
-    echo "Connect succesful";
+    $mysqlClient = new PDO(
+        'mysql:host=localhost;dbname=connect_flow;charset=utf8',
+        'root',
+        '',
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ]
+    );
+    echo "Connection successful";
 } catch (PDOException $e) {
-    echo "Connect faild",$e->getMessage();
+    echo "Connection failed: " . $e->getMessage();
 }
 ?>
