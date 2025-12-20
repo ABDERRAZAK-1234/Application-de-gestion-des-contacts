@@ -1,6 +1,5 @@
 <?php
 require_once 'db.php';
-// require '../config/quieries.php';
 ?>
 
 <!DOCTYPE html>
@@ -121,30 +120,30 @@ require_once 'db.php';
         <table>
             <thead>
                 <tr>
-                    <th>First</th>
-                    <th>Last</th>
-                    <th>Phone</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Telephone</th>
                     <th>Email</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if ($result): ?>
-                    <?php while ($row = $result->fetch()): ?>
+                <?php if (!empty($contacts)): ?>
+                    <?php foreach ($contacts as $contact): ?>
                         <tr>
-                            <td><?php echo $row["firstname"]; ?></td>
-                            <td><?php echo $row["lastname"]; ?></td>
-                            <td><?php echo $row["telephone"]; ?></td>
-                            <td><?php echo $row['email']; ?></td>
+                            <td><?php echo $contact['firstname']; ?></td>
+                            <td><?php echo $contact['lastname']; ?></td>
+                            <td><?php echo $contact['telephone']; ?></td>
+                            <td><?php echo $contact['email']; ?></td>
                             <td class="actions">
-                                <button class="edit" onclick="openEdit()">Edit</button>
-                                <button class="delete">Delete</button>
+                                <button class="edit" onclick="openEdit(<?php echo $contact['id']; ?>)">Edit</button>
+                                <button class="delete" onclick="deleteContact(<?php echo $contact['id']; ?>)">Delete</button>
                             </td>
                         </tr>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="5" style="text-align: center;">No contacts found</td>
+                        <td colspan="5" style="text-align: center;">No contacts found. Add your first contact!</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
@@ -158,7 +157,7 @@ require_once 'db.php';
 
             <input type="text" name="firstname" placeholder="First name">
             <input type="text" name="lastname" placeholder="Last name">
-            <input type="text" name="telephone" placeholder="Phone number">
+            <input type="tel" name="telephone" placeholder="Phone number">
             <input type="email" name="email" placeholder="Email">
 
             <button type="submit" name="submit">Add</button>
