@@ -28,31 +28,11 @@ if (isset($_POST["submit"])) {
                 ':password' => $password_hash
             ]);
 
-            $success_msg = "Inscription réussie! Vous pouvez maintenant vous connecter.";
+            $success_msg = "Inscription réussie";
+            header("Location: contact.php");
 
-            
         }
     } catch (PDOException $e) {
         $error_msg = "Erreur lors de l'inscription: " . $e->getMessage();
     }
 }
-
-
-
-
-
-
-// $stmt->execute([
-//     ':username' => $username,
-//     ':email' => $email,
-//     ':password' => $password_hash
-// ]);
-
-// echo "Utilisateur ajouté avec succès";
-
-// $check->execute([$email]);
-
-// if ($check->rowCount() > 0) {
-//     echo "Cet email existe déjà";
-//     exit;
-// }

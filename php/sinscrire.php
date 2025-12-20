@@ -1,7 +1,6 @@
 <?php
 require "db.php";
 require "regex.php";
-require "sinscrirelogic.php";
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +23,7 @@ require "sinscrirelogic.php";
                     <img src="../img/Sign-up-amico.svg" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form action="sinscrire.php" method="POST">
+                    <form action="sinscrirelogic.php" method="post">
                         <div
                             class="d-flex flex-row align-items-center justify-content-center justify-content-lg-center">
                             <h2 class="lead text-danger fw-normal mb-0 me-3 fs-3 fw-bold">Sign up</h2>
