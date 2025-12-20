@@ -5,7 +5,7 @@ try {
     $pdo = new PDO(
         'mysql:host=localhost;dbname=connect_flow;charset=utf8',
         'root',
-        '',
+        ''
         
     );
     // echo "Connection successful";

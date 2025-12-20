@@ -1,28 +1,58 @@
 <?php
 require_once 'db.php';
 
-$username = $_POST['username'];
-$email = $_POST['email'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+if (isset($_POST["submit"])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO users (username, email, password)
+    try {
+        $sqlSELECT = "SELECT id FROM users WHERE username = :username OR email = :email";
+        $stmt = $pdo->prepare($sqlSELECT);
+
+        $stmt->execute([
+            'username' => $username,
+            'email' => $email
+        ]);
+        if ($stmt->rowCount() > 0) {
+            $error_msg = "Cet email ou nom d'utilisateur existe déjà!";
+            header("Location: connexion.php");
+                exit();
+        } else {
+            $insert_query = "INSERT INTO users (username, email, password)
         VALUES (:username, :email, :password)";
+            $insert_stmt = $pdo->prepare($insert_query);
+            $insert_stmt->execute([
+                ':username' => $username,
+                ':email' => $email,
+                ':password' => $password_hash
+            ]);
 
-$stmt = $pdo->prepare($sql);
+            $success_msg = "Inscription réussie! Vous pouvez maintenant vous connecter.";
 
-$stmt->execute([
-    ':username' => $username,
-    ':email' => $email,
-    ':password' => $password
-]);
-
-echo "Utilisateur ajouté avec succès";
-
-$check = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-$check->execute([$email]);
-
-if ($check->rowCount() > 0) {
-    echo "Cet email existe déjà";
-    exit;
+            
+        }
+    } catch (PDOException $e) {
+        $error_msg = "Erreur lors de l'inscription: " . $e->getMessage();
+    }
 }
-?>
+
+
+
+
+
+
+// $stmt->execute([
+//     ':username' => $username,
+//     ':email' => $email,
+//     ':password' => $password_hash
+// ]);
+
+// echo "Utilisateur ajouté avec succès";
+
+// $check->execute([$email]);
+
+// if ($check->rowCount() > 0) {
+//     echo "Cet email existe déjà";
+//     exit;
+// }

@@ -1,0 +1,2 @@
+
+Inscription réussie!
