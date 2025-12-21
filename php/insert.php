@@ -1,7 +1,13 @@
 <?php
+session_start(); 
 require_once 'db.php';
 
-session_start(); // This should be at the top
+ if (!isset($_SESSION['user_id'])) {
+        die("User not logged in");
+    }
+
+$user_id = $_SESSION['user_id'];
+
 
 if (isset($_POST['submit'])) {
     $firstname = $_POST['firstname'];
@@ -9,17 +15,12 @@ if (isset($_POST['submit'])) {
     $telephone = $_POST['telephone'];
     $email = $_POST['email'];
     
-    // Add this check for user_id
-    if (!isset($_SESSION['user_id'])) {
-        die("User not logged in");
-    }
-    
-    $user_id = $_SESSION['user_id']; // Get user_id from session
 
-    $sql = 'INSERT INTO contacts (firstname, lastname, telephone, email, user_id) 
+
+    $sqlINSERT = 'INSERT INTO contacts (firstname, lastname, telephone, email, user_id) 
             VALUES (:firstname, :lastname, :telephone, :email, :user_id)';
     try {
-        $stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare($sqlINSERT);
         $stmt->execute([
             ':firstname' => $firstname,
             ':lastname' => $lastname,
@@ -30,7 +31,6 @@ if (isset($_POST['submit'])) {
         
         echo "Contact ajouté avec succès!";
         header("Location: contact.php");
-        exit();
         
     } catch (PDOException $e) {
         echo "Erreur: " . $e->getMessage();
@@ -38,31 +38,20 @@ if (isset($_POST['submit'])) {
 }
 
 try {
-    $sql2 = 'SELECT id, firstname, lastname, telephone, email FROM contacts WHERE user_id = :user_id';
-    $stmt = $pdo->prepare($sql2);
-    $stmt->execute([':user_id' => $user_id]);
+   
+    $sqlSELECT = "SELECT * FROM contacts WHERE user_id = ?";
+    $stmt = $pdo->prepare($sqlSELECT);
+    $stmt->execute([$user_id]);
     $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    var_dump($contacts);
+    $_SESSION['contacts'] = $contacts;
+    var_dump($_SESSION['contacts']);
+    header("location: contact.php");
+    exit;
+
 } catch (PDOException $e) {
     $error = "Error loading contacts: " . $e->getMessage();
     $contacts = [];
 }
 
-
-
-// $sql2 = 'SELECT firstname, lastname, telephone , email FROM contacts';
-// $result = $pdo->query($sql2);
-// print_r($result);
-
-
-
-// while ($row = $result->fetch()) {
-//     echo "<br>";
-//     echo " - Name: " . $row["firstname"] . " " . $row["lastname"] .  "<br>";
-//     echo " - Tel: " . $row["telephone"] . "<br>";
-//     echo " - Email: " . $row["email"] . "<br>";
-// }
-
-
-
-
-// header("location:contact.php");
