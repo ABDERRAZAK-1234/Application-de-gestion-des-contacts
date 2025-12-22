@@ -16,6 +16,14 @@ require "regex.php";
 </head>
 
 <body>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand text-primary fs-3 fw-bold">CONNECT FLOW</a>
+      <form class="d-flex">
+        <a class="btn btn-outline-success" href="connexion.php" type="submit">Se connecter</a>
+      </form>
+    </div>
+  </nav>
     <section class="vh-100">
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">

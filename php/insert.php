@@ -1,10 +1,10 @@
 <?php
-session_start(); 
+session_start();
 require_once 'db.php';
 
- if (!isset($_SESSION['user_id'])) {
-        die("User not logged in");
-    }
+if (!isset($_SESSION['user_id'])) {
+    die("User not logged in");
+}
 
 $user_id = $_SESSION['user_id'];
 
@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $lastname = $_POST['lastname'];
     $telephone = $_POST['telephone'];
     $email = $_POST['email'];
-    
+
 
 
     $sqlINSERT = 'INSERT INTO contacts (firstname, lastname, telephone, email, user_id) 
@@ -28,14 +28,16 @@ if (isset($_POST['submit'])) {
             ':email' => $email,
             ':user_id' => $user_id
         ]);
-        
+
         echo "Contact ajouté avec succès!";
         header("Location: contact.php");
-        
     } catch (PDOException $e) {
         echo "Erreur: " . $e->getMessage();
     }
+} else if (isset($_POST["annuler"])) {
+    header("Location: contact.php");
 }
+
 
 try {
    
@@ -54,4 +56,3 @@ try {
     $error = "Error loading contacts: " . $e->getMessage();
     $contacts = [];
 }
-

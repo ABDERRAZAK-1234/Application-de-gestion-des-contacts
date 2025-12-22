@@ -15,6 +15,15 @@ require "regex.php";
 </head>
 
 <body>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand text-primary fs-3 fw-bold">CONNECT FLOW</a>
+      <form class="d-flex justify-content-between">
+        <a href="sinscrire.php" type="button" class="btn btn-primary text-white ms-4">S’inscrire</a>
+      </form>
+    </div>
+  </nav>
+
   <section class="vh-100">
     <div class="container-fluid h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100">

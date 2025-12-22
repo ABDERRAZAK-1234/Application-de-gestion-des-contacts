@@ -1,5 +1,11 @@
 <?php
+session_start();
 require_once 'db.php';
+// require_once 'select.php';
+
+    $contacts = (isset($_SESSION['contacts']) ? $_SESSION['contacts'] : []);
+   
+
 ?>
 
 <!DOCTYPE html>
@@ -13,15 +19,13 @@ require_once 'db.php';
         body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            padding: 40px;
         }
 
         .container {
             background: white;
             width: 500px;
-            padding: 20px;
+            margin: 50px 0;
+            /* padding: 20px; */
             border-radius: 6px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
@@ -48,10 +52,14 @@ require_once 'db.php';
 
         .edit {
             background: #555;
+            border-radius: 5px;
+            width: 50px;
         }
 
         .delete {
             background: #b00020;
+            border-radius: 5px;
+
         }
 
         table {
@@ -83,7 +91,7 @@ require_once 'db.php';
 
         .modal-content {
             background: white;
-            width: 300px;
+            margin: 0 25%;
             padding: 20px;
             border-radius: 6px;
         }
@@ -106,13 +114,26 @@ require_once 'db.php';
         .actions {
             display: flex;
             gap: 5px;
+
         }
     </style>
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
 
-    <div class="container">
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand text-primary fs-3 fw-bold">CONNECT FLOW</a>
+      <form class="d-flex justify-content-between">
+        <a class="btn btn-outline-danger" href="index.php" type="submit">Deconnecter</a>
+      </form>
+    </div>
+  </nav>
+
+    <div class="container ">
         <h2>Contacts</h2>
 
         <button class="add-btn" onclick="openAdd()">Add Contact</button>
@@ -160,11 +181,11 @@ require_once 'db.php';
             <input type="tel" name="telephone" placeholder="Phone number">
             <input type="email" name="email" placeholder="Email">
 
-            <button type="submit" name="submit">Add</button>
-            <button class="close" onclick="closeAdd()">Cancel</button>
+            <button type="submit" name="submit" >Add</button>
+            <button class="close" name="annuler" onclick="closeAdd()">Cancel</button>
         </form>
         <?php
-        var_dump($_POST['submit']);
+        // var_dump($_POST['submit']);
         ?>
     </div>
 
@@ -200,6 +221,7 @@ require_once 'db.php';
             document.getElementById('editModal').style.display = 'none';
         }
     </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
 
